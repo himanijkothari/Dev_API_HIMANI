@@ -1,55 +1,32 @@
-/**
- * Entity that represents the article
- * @authorname: Himani Paronigar
- */
-
 package se.dev.api;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-public class Article {
-
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
-
     private String body;
 
     private String authorName;
 
+    @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
+    private Article article;
 
-
-    @OneToMany(mappedBy = "article")
-    @JsonIgnore
-    private List<Comment> comments;
-
-    public  Article()
-    {
-
+    public Article getArticle() {
+        return article;
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public Article(String title, String body, String authorName) {
-        this.title = title;
-        this.body = body;
-        this.authorName = authorName;
+    public void setArticle(Article article) {
+        this.article = article;
     }
 
     public Long getId() {
@@ -58,14 +35,6 @@ public class Article {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getBody() {
