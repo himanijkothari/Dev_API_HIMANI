@@ -33,6 +33,11 @@ public class Article {
     @JsonIgnore
     private List<Comment> comments;
 
+
+    @ManyToMany(cascade = CascadeType.ALL,  mappedBy = "relatedArticle")
+
+    private List<Topic> relatedTopics;
+
     public  Article()
     {
 
@@ -44,6 +49,14 @@ public class Article {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public List<Topic> getRelatedTopics() {
+        return relatedTopics;
+    }
+
+    public void setRelatedTopics(List<Topic> relatedTopics) {
+        this.relatedTopics = relatedTopics;
     }
 
     public Article(String title, String body, String authorName) {
