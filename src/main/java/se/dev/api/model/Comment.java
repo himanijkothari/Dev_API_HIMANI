@@ -1,9 +1,9 @@
-package se.dev.api;
+/**
+ * Represents the Comment
+ */
+package se.dev.api.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import javax.persistence.*;
 
 @Entity
@@ -12,22 +12,12 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String body;
-
     private String authorName;
 
     @ManyToOne
     @JsonIdentityReference(alwaysAsId = true)
     private Article article;
-
-    public Article getArticle() {
-        return article;
-    }
-
-    public void setArticle(Article article) {
-        this.article = article;
-    }
 
     public Long getId() {
         return id;
@@ -51,5 +41,13 @@ public class Comment {
 
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
+    }
+
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
     }
 }

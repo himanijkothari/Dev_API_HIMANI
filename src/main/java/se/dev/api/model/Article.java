@@ -1,63 +1,31 @@
 /**
- * Entity that represents the article
- * @authorname: Himani Paronigar
+ * Represents the article
  */
+package se.dev.api.model;
 
-package se.dev.api;
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import javax.persistence.*;
 import java.util.List;
+
 
 @Entity
 public class Article {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
-
     private String body;
-
     private String authorName;
-
-
 
     @OneToMany(mappedBy = "article")
     @JsonIgnore
     private List<Comment> comments;
 
-
-    @ManyToMany(cascade = CascadeType.ALL,  mappedBy = "relatedArticle")
-
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "relatedArticle")
     private List<Topic> relatedTopics;
 
-    public  Article()
-    {
-
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public List<Topic> getRelatedTopics() {
-        return relatedTopics;
-    }
-
-    public void setRelatedTopics(List<Topic> relatedTopics) {
-        this.relatedTopics = relatedTopics;
-    }
+    public Article() { }
 
     public Article(String title, String body, String authorName) {
         this.title = title;
@@ -95,5 +63,21 @@ public class Article {
 
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<Topic> getRelatedTopics() {
+        return relatedTopics;
+    }
+
+    public void setRelatedTopics(List<Topic> relatedTopics) {
+        this.relatedTopics = relatedTopics;
     }
 }

@@ -1,9 +1,9 @@
-package se.dev.api;
+/**
+ * Represents the Topic
+ */
+package se.dev.api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,21 +14,11 @@ public class Topic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-
     private String name;
 
     @ManyToMany
     @JsonIgnore
-
-    private List<Article> relatedArticle = new ArrayList<>() ;
-
-    public List<Article> getRelatedArticle() {
-        return relatedArticle;
-    }
-
-    public void setRelatedArticle(List<Article> relatedArticle) {
-        this.relatedArticle = relatedArticle;
-    }
+    private List<Article> relatedArticle = new ArrayList<>();
 
     public Long getId() {
         return Id;
@@ -44,5 +34,13 @@ public class Topic {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Article> getRelatedArticle() {
+        return relatedArticle;
+    }
+
+    public void setRelatedArticle(List<Article> relatedArticle) {
+        this.relatedArticle = relatedArticle;
     }
 }
