@@ -13,6 +13,7 @@ import se.dev.api.model.Topic;
 import se.dev.api.repository.ArticleRepository;
 import se.dev.api.repository.TopicRepository;
 import javax.validation.Valid;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -46,11 +47,11 @@ public class TopicController {
     }
 
     @PostMapping("/articles/{articleId}/topics") //problem
-    public ResponseEntity<Topic>  createTopicToArticle(@PathVariable Long articleId,@Valid @RequestBody Topic topic)
+    public ResponseEntity<Topic> createTopicToArticle(@PathVariable Long articleId, @Valid @RequestBody Topic topic)
     {
         Article article = articleRepository
-                            .findById(articleId)
-                            .orElseThrow(ResourceNotFoundException::new);
+                .findById(articleId)
+                .orElseThrow(ResourceNotFoundException::new);
         Optional<Topic> topic1 = topicRepository.findById(topic.getId());
 
         if (topic1.isEmpty()) {
@@ -61,6 +62,7 @@ public class TopicController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(topic);
+
     }
 
     @PostMapping("/topics")

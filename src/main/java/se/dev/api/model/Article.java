@@ -18,7 +18,7 @@ public class Article {
     private String body;
     private String authorName;
 
-    @OneToMany(mappedBy = "article")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "article")
     @JsonIgnore
     private List<Comment> comments;
 

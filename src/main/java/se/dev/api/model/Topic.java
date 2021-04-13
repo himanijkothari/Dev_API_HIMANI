@@ -18,7 +18,14 @@ public class Topic {
 
     @ManyToMany
     @JsonIgnore
-    private List<Article> relatedArticle = new ArrayList<>();
+    @JoinColumn(nullable = false)
+    private List<Article> relatedArticle= new ArrayList<>();
+
+    public Topic(){}
+    public Topic(Long id, String name) {
+        Id = id;
+        this.name = name;
+    }
 
     public Long getId() {
         return Id;
