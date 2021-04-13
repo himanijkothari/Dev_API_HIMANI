@@ -5,10 +5,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CommentRepository extends JpaRepository<Comment,Long> {
 
-    @Query("SELECT c.authorName FROM Comment c where c.authorName = :commentAuthorName")
-    List<Comment> findByAuthorName(@Param("commentAuthorName") String authorName);
+    @Query("SELECT c FROM Comment c where c.authorName = :commentAuthorName")
+    Optional<List<Comment>> findByAuthorName(@Param("commentAuthorName") String authorName);
+
 
 }

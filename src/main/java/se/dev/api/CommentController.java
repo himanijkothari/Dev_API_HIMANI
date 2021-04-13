@@ -32,10 +32,10 @@ public class CommentController {
     }
 
 
-   @GetMapping(value="/comments", params ={"authorName"})
-    public ResponseEntity<List<Comment>> listAllCommentByAuthor(@RequestParam String authorName)
+   @GetMapping("/comments")
+    public ResponseEntity<List<Comment>> listAllCommentByAuthor(@RequestParam(value ="authorName", required = true) String authorName)
     {
-            List<Comment> comments = commentRepository.findByAuthorName(authorName);
+            List<Comment> comments = commentRepository.findByAuthorName(authorName).orElseThrow(ResourceNotFoundException::new);
             return ResponseEntity.ok(comments);
 
 
